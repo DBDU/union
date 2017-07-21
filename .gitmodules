@@ -1,0 +1,3 @@
+[submodule "union/cogs"]
+	path = union/cogs
+	url = https://github.com/DBDU/cogs
