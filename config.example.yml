@@ -1,0 +1,5 @@
+## This is an example configuration file for the bot.
+## Make sure to edit it prior to using it.
+
+# The token for the bot.
+token: mfa.exampletoken

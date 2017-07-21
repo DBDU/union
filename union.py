@@ -1,14 +1,14 @@
 from discord.ext import commands
-import discord
 
-import config
 
 class Union(commands.AutoShardedBot):
-    def __init__(self):
-        super().__init__(command_prefix='!')
+    def __init__(self, config):
+        self.config = config
+
+        super().__init__(command_prefix=self.config.get("command_prefix", "!"))
 
     async def on_ready(self):
         print(f'Logged in as {self.user} ({self.user.id})')
 
     def run(self):
-        super().run(config.token, reconnect=True)
+        super().run(self.config["token"], reconnect=True)
