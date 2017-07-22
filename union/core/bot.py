@@ -2,7 +2,8 @@ import traceback
 
 from discord.ext import commands
 from discord.ext.commands import Context, CommandError, CheckFailure, UserInputError, \
-    DisabledCommand, CommandOnCooldown, NotOwner, NoPrivateMessage, CommandInvokeError
+    DisabledCommand, CommandOnCooldown, NotOwner, NoPrivateMessage, CommandInvokeError, \
+    CommandNotFound
 
 
 class Union(commands.AutoShardedBot):
@@ -19,6 +20,11 @@ class Union(commands.AutoShardedBot):
         """
         Handles non-fatal command errors.
         """
+        # check for commandnotfound before joining args
+        # as it saves a few cycles not having to execute the join
+        if isinstance(exception, CommandNotFound):
+            return
+
         # joined args are defined here to prevent code duplication
         # rather than in the format strings
         args = ' '.join(exception.args)
@@ -42,7 +48,7 @@ class Union(commands.AutoShardedBot):
             traceback.print_exception(type(exception.__cause__), exception.__cause__,
                                       exception.__cause__.__traceback__)
         else:
-            message = f"\N{QUESTION MARK} An unknown error has occurred."
+            message = f"\N{BLACK QUESTION MARK ORNAMENT} An unknown error has occurred."
             traceback.print_exception(type(exception), exception, exception.__traceback__)
 
         await context.send(message)
