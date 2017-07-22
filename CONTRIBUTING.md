@@ -7,6 +7,20 @@ This project follows PEP 8 guidelines with the following modifications:
 * Recommended line length is 80 characters or fewer
 * Maximum line length is 100 characters
 
+Other guidelines:
+
+* Single quotes should be for single characters or messages that contain a
+  double quote; double quotes should be for multiple characters or messages that
+  contain a single quote
+* One-line docstrings are not allowed. Docstrings should always follow this
+  format:
+
+```py
+"""
+This is the proper format.
+"""
+```
+
 ## Git
 
 The [triangle workflow][triangle-workflow] is the suggested git workflow for
