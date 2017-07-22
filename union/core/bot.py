@@ -13,7 +13,7 @@ class Union(commands.AutoShardedBot):
         #: The current bot's config.
         self.config = config
 
-        super().__init__(command_prefix=self.config.get("command_prefix", "!"))
+        super().__init__(command_prefix=self.config.get("command_prefix", '!'))
 
     async def on_command_error(self, context: Context, exception: CommandError):
         """
@@ -48,7 +48,7 @@ class Union(commands.AutoShardedBot):
         await context.send(message)
 
     async def on_ready(self):
-        print(f'Logged in as {self.user} ({self.user.id})')
+        print(f"Logged in as {self.user} ({self.user.id})")
 
     def run(self):
         super().run(self.config["token"], reconnect=True)
