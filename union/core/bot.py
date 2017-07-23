@@ -16,6 +16,9 @@ class Union(commands.AutoShardedBot):
 
         super().__init__(command_prefix=self.config.get("command_prefix", '!'))
 
+        for cog in self.config.get('cogs', []):
+            self.load_extension('union.cogs.{}'.format(cog))
+
     async def on_command_error(self, context: Context, exception: CommandError):
         """
         Handles non-fatal command errors.
