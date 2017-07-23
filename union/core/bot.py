@@ -18,7 +18,15 @@ class Union(commands.AutoShardedBot):
         super().__init__(command_prefix=self.config.get("command_prefix", '!'))
 
         self.session = aiohttp.ClientSession(loop=self.loop)
-
+        
+        for cog in self.config.get('cogs', []):
+            print(f"Loading cog {cog}...")
+            try:
+                self.load_extension(cog)
+            except Exception as ex:
+                print(f"Failed to load cog: {cog}")
+                traceback.print_exception(type(ex), ex, ex.__traceback__)
+                
     def __del__(self):
         self.session.close()
 

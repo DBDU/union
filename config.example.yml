@@ -6,3 +6,7 @@ token: mfa.exampletoken
 
 # The command prefix used by the bot.
 command_prefix: '!!'
+
+# Cogs to load.
+cogs:
+  - union.cogs.utility
