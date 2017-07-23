@@ -3,7 +3,6 @@ import io
 import sys
 import traceback
 
-import aiohttp
 import discord
 from discord.ext import commands
 
@@ -15,10 +14,6 @@ class Core:
 
     def __init__(self, bot):
         self.bot = bot
-        self.session = aiohttp.ClientSession(loop=bot.loop)
-
-    def __unload(self):
-        self.session.close()
 
     @commands.group(invoke_without_command=True)
     @commands.is_owner()
@@ -73,7 +68,7 @@ class Core:
         else:
             # Since it's owner only right now
             # we give absolute trust to the URL
-            async with self.session.get(url) as resp:
+            async with ctx.bot.session.get(url) as resp:
                 buffer.write(await resp.read())
 
         buffer.seek(0)

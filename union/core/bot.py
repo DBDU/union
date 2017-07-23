@@ -1,5 +1,6 @@
 import traceback
 
+import aiohttp
 from discord.ext import commands
 from discord.ext.commands import Context, CommandError, CheckFailure, UserInputError, \
     DisabledCommand, CommandOnCooldown, NotOwner, NoPrivateMessage, CommandInvokeError, \
@@ -15,6 +16,11 @@ class Union(commands.AutoShardedBot):
         self.config = config
 
         super().__init__(command_prefix=self.config.get("command_prefix", '!'))
+
+        self.session = aiohttp.ClientSession(loop=self.loop)
+
+    def __del__(self):
+        self.session.close()
 
     async def on_command_error(self, context: Context, exception: CommandError):
         """
