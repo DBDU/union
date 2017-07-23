@@ -1,4 +1,8 @@
-import ruamel.yaml as yaml
+from ruamel.yaml import load, YAMLError
+try:
+    from ruamel.yaml import CLoader as Loader
+except ImportError:
+    from ruamel.yaml import Loader
 
 from union import Union
 
@@ -9,8 +13,8 @@ def main():
     """
     with open("config.yml", 'r') as stream:
         try:
-            config = yaml.load(stream, yaml.Loader)
-        except yaml.YAMLError as exc:
+            config = load(stream, Loader)
+        except YAMLError as exc:
             print(exc)
             return
 
