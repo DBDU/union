@@ -6,3 +6,6 @@ token: mfa.exampletoken
 
 # The command prefix used by the bot.
 command_prefix: '!!'
+
+cogs:
+  - utility
