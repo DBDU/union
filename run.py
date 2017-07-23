@@ -1,5 +1,5 @@
-import sys
 import ruamel.yaml as yaml
+
 from union import Union
 
 

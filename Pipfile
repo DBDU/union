@@ -5,6 +5,9 @@ verify_ssl = true
 [packages]
 "ruamel.yaml" = ">=0.15.19,<0.16.0"
 
+[dev-packages]
+flake8 = "*"
+
 [packages."discord.py"]
 git = "https://github.com/rapptz/discord.py"
 ref = "rewrite"
