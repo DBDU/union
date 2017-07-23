@@ -1,5 +1,6 @@
 import traceback
 
+import aiohttp
 from discord.ext import commands
 from discord.ext.commands import Context, CommandError, CheckFailure, UserInputError, \
     DisabledCommand, CommandOnCooldown, NotOwner, NoPrivateMessage, CommandInvokeError, \
@@ -16,6 +17,8 @@ class Union(commands.AutoShardedBot):
 
         super().__init__(command_prefix=self.config.get("command_prefix", '!'))
 
+        self.session = aiohttp.ClientSession(loop=self.loop)
+        
         for cog in self.config.get('cogs', []):
             print(f"Loading cog {cog}...")
             try:
@@ -23,6 +26,9 @@ class Union(commands.AutoShardedBot):
             except Exception as ex:
                 print(f"Failed to load cog: {cog}")
                 traceback.print_exception(type(ex), ex, ex.__traceback__)
+                
+    def __del__(self):
+        self.session.close()
 
     async def on_command_error(self, context: Context, exception: CommandError):
         """
