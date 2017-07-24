@@ -1,6 +1,6 @@
-# union
+# Union Discord Bot
 
-A collaboratively developed Discord bot.
+A collaboratively developed Discord bot, to be used as the base framework for the Union deployment system.
 
 ## Running
 
