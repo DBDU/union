@@ -6,6 +6,8 @@ from discord.ext.commands import Context, CommandError, CheckFailure, UserInputE
     DisabledCommand, CommandOnCooldown, NotOwner, NoPrivateMessage, CommandInvokeError, \
     CommandNotFound
 
+from . import context
+
 
 class Union(commands.AutoShardedBot):
     """
@@ -69,6 +71,14 @@ class Union(commands.AutoShardedBot):
 
     async def on_ready(self):
         print(f"Logged in as {self.user} ({self.user.id})")
+
+    async def process_commands(self, message):
+        ctx = await self.get_context(message, cls=context.Context)
+
+        if not ctx.command:
+            return
+
+        await self.invoke(ctx)
 
     def run(self):
         super().run(self.config["token"], reconnect=True)
