@@ -72,6 +72,33 @@ class Union(commands.AutoShardedBot):
 
             return default
 
+    async def set_config(self, realm: str, key: str, value: str):
+        """
+        Sets a config value.
+
+        :param realm: The realm of storage (usually the cog name).
+            Passing None will use internal configuration (usually not needed).
+
+        :param key: The config key to set.
+        :param value: The value to set.
+        """
+        if self.standalone:
+            if self.dev:
+                config_data = pathlib.Path("cog-config-dev.json")
+            else:
+                config_data = pathlib.Path("cog-config.json")
+
+            data = json.loads(config_data.read_text())
+            try:
+                data[realm][key] = value
+            except KeyError:
+                data[realm] = {key: value}
+
+            dumped = json.dumps(data)
+            config_data.write_text(dumped, encoding='utf-8')
+        else:
+            raise NotImplementedError
+
     async def on_command_error(self, context: Context, exception: CommandError):
         """
         Handles non-fatal command errors.
