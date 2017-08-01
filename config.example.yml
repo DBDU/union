@@ -1,5 +1,12 @@
-## This is an example configuration file for the bot.
+## This is an example configuration file for the bot in standalone mode.
 ## Make sure to edit it prior to using it.
+
+# Don't change this.
+# This boots the bot in standalone mode and not as a bot node.
+standalone: true
+
+# If this bot is in development mode.
+dev: true
 
 # The token for the bot.
 token: mfa.exampletoken
