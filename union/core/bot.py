@@ -16,7 +16,7 @@ class Union(commands.AutoShardedBot):
     """
     The core bot class.
     """
-    _no_default = object()
+    no_default = object()
 
     def __init__(self, config: dict):
         #: The current bot's internal config.
@@ -42,7 +42,7 @@ class Union(commands.AutoShardedBot):
     def __del__(self):
         self.session.close()
 
-    async def get_config(self, realm: str, key: str, *, default: typing.Any = _no_default):
+    async def get_config(self, realm: str, key: str, *, default: typing.Any = no_default):
         """
         Gets a config value.
 
@@ -67,7 +67,7 @@ class Union(commands.AutoShardedBot):
             return data[realm][key]
         except KeyError:
             # check for sentinel instead of None as default
-            if default is self._no_default:
+            if default is self.no_default:
                 raise
 
             return default

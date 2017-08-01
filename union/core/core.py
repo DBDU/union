@@ -6,18 +6,18 @@ import traceback
 import discord
 from discord.ext import commands
 
+from union.core.cog import Cog
+from union.core.context import Context
 
-class Core:
+
+class Core(Cog):
     """
     Core features of the bot.
     """
 
-    def __init__(self, bot):
-        self.bot = bot
-
     @commands.group(invoke_without_command=True)
     @commands.is_owner()
-    async def change(self, ctx):
+    async def change(self, ctx: Context):
         """
         Change the looks of the bot.
         """
@@ -25,7 +25,7 @@ class Core:
 
     @change.command(aliases=["username"])
     @commands.is_owner()
-    async def name(self, ctx, *, username: commands.clean_content):
+    async def name(self, ctx: Context, *, username: commands.clean_content):
         """
         Change the username of the bot.
         """
@@ -34,7 +34,7 @@ class Core:
 
     @change.command(aliases=['playing'])
     @commands.is_owner()
-    async def game(self, ctx, *, message: commands.clean_content):
+    async def game(self, ctx: Context, *, message: commands.clean_content):
         """
         Change the game of the bot.
         """
@@ -43,7 +43,7 @@ class Core:
 
     @change.command()
     @commands.is_owner()
-    async def status(self, ctx, *, status):
+    async def status(self, ctx: Context, *, status):
         """
         Change the status of the bot.
         """
@@ -52,7 +52,7 @@ class Core:
 
     @change.command(aliases=["avy"])
     @commands.is_owner()
-    async def avatar(self, ctx, url: str = None):
+    async def avatar(self, ctx: Context, url: str = None):
         """
         Change the avatar of the bot.
 
@@ -79,7 +79,7 @@ class Core:
 
     @commands.command(aliases=['eval'])
     @commands.is_owner()
-    async def debug(self, ctx, *, code: str):
+    async def debug(self, ctx: Context, *, code: str):
         """
         Run code.
         """
@@ -107,7 +107,7 @@ class Core:
 
     @commands.command()
     @commands.is_owner()
-    async def quit(self, ctx):
+    async def quit(self, ctx: Context):
         """
         Shut off the bot.
         """
@@ -115,5 +115,4 @@ class Core:
         await ctx.bot.logout()
 
 
-def setup(bot):
-    bot.add_cog(Core(bot))
+setup = Core.setup
