@@ -1,4 +1,6 @@
 # Union Discord Bot
+# This project is now dead. We may continue at some point, but most likely not.
+## Rip in peace Union
 
 A collaboratively developed Discord bot, to be used as the base framework for the Union deployment system.
 
